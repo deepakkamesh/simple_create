@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <sdf version="1.5">
   <world name="default">
     <include>
@@ -6,32 +7,71 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-
     <!-- Name it uniquely to not conflict with <include>'d model  -->
     <model name="simple_create">
       <include>
-	<uri>model://create</uri>
+        <uri>model://create</uri>
       </include>
-      <plugin name="differential_drive_controller"     filename="libgazebo_ros_diff_drive.so">
-	<alwaysOn>true</alwaysOn>
-	<updateRate>10</updateRate>
-	<leftJoint>create::right_wheel</leftJoint>
-	<rightJoint>create::left_wheel</rightJoint>
-
-	<wheelSeparation>0.5380</wheelSeparation>
-	<wheelDiameter>0.2410</wheelDiameter>
-
-	<torque>20</torque>
-	<commandTopic>cmd_vel</commandTopic>
-
-	<!-- topic name published in the cpp file -->
-	<odometryTopic>odom</odometryTopic>
-	<odometryFrame>odom</odometryFrame>
-	<robotBaseFrame>base</robotBaseFrame>
-
-	<publishWheelTF>true</publishWheelTF>
-	<publishWheelJointState>true</publishWheelJointState>
+      <include>
+        <uri>model://hokuyo</uri>
+        <pose>0.2 0 0.2 0 0 0</pose>
+      </include>
+      <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>10</updateRate>
+        <leftJoint>create::right_wheel</leftJoint>
+        <rightJoint>create::left_wheel</rightJoint>
+        <wheelSeparation>0.5380</wheelSeparation>
+        <wheelDiameter>0.2410</wheelDiameter>
+        <torque>20</torque>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <odometryFrame>odom</odometryFrame>
+        <robotBaseFrame>base</robotBaseFrame>
+        <publishWheelTF>true</publishWheelTF>
+        <publishWheelJointState>true</publishWheelJointState>
       </plugin>
+      <link name="link_1">
+        <sensor name="laser_sensor" type="gpu_ray">
+          <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>640</samples>
+                <resolution>1</resolution>
+                <min_angle>-1.396263</min_angle>
+                <max_angle>1.396263</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <resolution>0.5</resolution>
+                <min_angle>-0.7854</min_angle>
+                <max_angle>0.7854</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.080000000000000002</min>
+              <max>10.0</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name="plugin_1" filename="libgazebo_ros_gpu_laser.so">
+            <alwaysOn>1</alwaysOn>
+            <updateRate>20.0</updateRate>
+            <gaussianNoise>0.0</gaussianNoise>
+            <imageTopicName>image</imageTopicName>
+            <topicName>laser_scan</topicName>
+            <frameName>/map</frameName>
+            <pointCloudCutoff>0.001</pointCloudCutoff>
+          </plugin>
+          <always_on>true</always_on>
+          <update_rate>20.0</update_rate>
+        </sensor>
+      </link>
+      <joint name="hokuyo_joint" type="fixed">
+        <child>hokuyo::link</child>
+        <parent>create::base</parent>
+      </joint>
     </model>
   </world>
 </sdf>
