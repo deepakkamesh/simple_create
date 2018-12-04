@@ -10,6 +10,6 @@
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>
   </include>
-  <node name="publisher" pkg="simple_create" type="circle.py" required="true" />
+<!--  <node name="publisher" pkg="simple_create" type="circle.py" required="true" /> -->
 
 </launch>
