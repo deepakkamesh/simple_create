@@ -78,7 +78,7 @@
         <torque>20</torque>
         <commandTopic>cmd_vel</commandTopic>
         <odometryTopic>odom</odometryTopic>
-        <odometryFrame>odom</odometryFrame>
+        <odometryFrame>laser_frame</odometryFrame>
         <robotBaseFrame>base</robotBaseFrame>
         <publishWheelTF>true</publishWheelTF>
         <publishWheelJointState>true</publishWheelJointState>
