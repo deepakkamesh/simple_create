@@ -7,7 +7,10 @@
     <include>
       <uri>model://ground_plane</uri>
     </include>
-    <!-- This is a custom model. Export GAZEBO_MODEL_PATH to include the location of this model file -->
+
+    <include>
+      <uri>model://turtlebot3_plaza</uri>
+    </include>
       <include>
        <uri>model://sonny</uri>
       </include>
