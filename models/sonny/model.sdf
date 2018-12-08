@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='sonny'>
-    <link name='simple_create::create::base'>
+    <link name='base'>
       <inertial>
         <pose frame=''>0.001453 -0.000453 0.029787 0 -0 0</pose>
         <inertia>
@@ -339,7 +339,7 @@
         </surface>
       </collision>
     </link>
-    <link name='simple_create::create::left_wheel'>
+    <link name='left_wheel'>
       <pose frame=''>-0 0.13 0.032 0 -0 0</pose>
       <inertial>
         <inertia>
@@ -423,7 +423,7 @@
         </surface>
       </collision>
     </link>
-    <link name='simple_create::create::right_wheel'>
+    <link name='right_wheel'>
       <pose frame=''>0 -0.13 0.032 0 -0 0</pose>
       <inertial>
         <inertia>
@@ -589,8 +589,10 @@
             </range>
           </ray>
           <plugin name='laser' filename='libgazebo_ros_laser.so'>
-            <topicName>/laser_scan</topicName>
-            <frameName>laser_frame</frameName>
+            <topicName>laser_scan</topicName>
+            <frameName>base</frameName>
+            <robotNamespace>sonny</robotNamespace>
+            <robotBaseFrame>base</robotBaseFrame>
           </plugin>
           <always_on>1</always_on>
           <update_rate>30</update_rate>
@@ -602,7 +604,7 @@
       </link>
     </model>
     <joint name='hokuyo_joint' type='fixed'>
-      <parent>simple_create::create::base</parent>
+      <parent>base</parent>
       <child>hokuyo::link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
@@ -618,9 +620,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='simple_create::create::left_wheel' type='revolute'>
-      <parent>simple_create::create::base</parent>
-      <child>simple_create::create::left_wheel</child>
+    <joint name='left_wheel' type='revolute'>
+      <parent>base</parent>
+      <child>left_wheel</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -651,9 +653,9 @@
         </ode>
       </physics>
     </joint>
-    <joint name='simple_create::create::right_wheel' type='revolute'>
-      <parent>simple_create::create::base</parent>
-      <child>simple_create::create::right_wheel</child>
+    <joint name='right_wheel' type='revolute'>
+      <parent>base</parent>
+      <child>right_wheel</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
         <xyz>0 1 0</xyz>
@@ -689,14 +691,14 @@
     <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
       <alwaysOn>1</alwaysOn>
       <updateRate>10</updateRate>
-      <leftJoint>simple_create::create::right_wheel</leftJoint>
-      <rightJoint>simple_create::create::left_wheel</rightJoint>
+      <leftJoint>right_wheel</leftJoint>
+      <rightJoint>left_wheel</rightJoint>
       <wheelSeparation>0.5380</wheelSeparation>
       <wheelDiameter>0.2410</wheelDiameter>
       <torque>20</torque>
       <commandTopic>/cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
-      <odometryFrame>laser_frame</odometryFrame>
+      <odometryFrame>odomFrame</odometryFrame>
       <robotBaseFrame>base</robotBaseFrame>
       <publishWheelTF>1</publishWheelTF>
       <publishWheelJointState>1</publishWheelJointState>
