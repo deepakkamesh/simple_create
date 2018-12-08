@@ -591,8 +591,8 @@
           <plugin name='laser' filename='libgazebo_ros_laser.so'>
             <topicName>laser_scan</topicName>
             <frameName>base</frameName>
-            <robotNamespace>sonny</robotNamespace>
             <robotBaseFrame>base</robotBaseFrame>
+            <robotNamespace>sonny</robotNamespace>
           </plugin>
           <always_on>1</always_on>
           <update_rate>30</update_rate>
