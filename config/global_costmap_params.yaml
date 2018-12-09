@@ -1,11 +1,8 @@
-global_costmap:
   global_frame: map
-  robot_base_frame: sonny/base
-  update_frequency: 2.0
-  width: 25 
-  height: 25
-  origin_x: -7.5
-  origin_y: -7.5
-  static_map: true
-  inflation_radius: 2.5
-  resolution: 0.1
+  rolling_window: false
+  track_unknown_space: true
+
+  plugins:
+   - {name: static,           type: "costmap_2d::StaticLayer"}
+   - {name: inflation,                 type: "costmap_2d::InflationLayer"}
+
