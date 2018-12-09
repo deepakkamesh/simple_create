@@ -690,7 +690,7 @@
     <allow_auto_disable>1</allow_auto_disable>
     <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
       <alwaysOn>1</alwaysOn>
-      <updateRate>10</updateRate>
+      <updateRate>100</updateRate>
       <leftJoint>right_wheel</leftJoint>
       <rightJoint>left_wheel</rightJoint>
       <wheelSeparation>0.5380</wheelSeparation>
