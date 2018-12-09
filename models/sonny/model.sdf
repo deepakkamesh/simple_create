@@ -590,7 +590,7 @@
           </ray>
           <plugin name='laser' filename='libgazebo_ros_laser.so'>
             <topicName>laser_scan</topicName>
-            <frameName>base</frameName>
+            <frameName>laserFrame</frameName>
             <robotBaseFrame>base</robotBaseFrame>
             <robotNamespace>sonny</robotNamespace>
           </plugin>
@@ -700,6 +700,7 @@
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odomFrame</odometryFrame>
       <robotBaseFrame>base</robotBaseFrame>
+      <robotNamespace>sonny</robotNamespace>
       <publishWheelTF>1</publishWheelTF>
       <publishWheelJointState>1</publishWheelJointState>
     </plugin>

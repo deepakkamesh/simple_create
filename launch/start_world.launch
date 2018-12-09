@@ -5,7 +5,7 @@
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <env name="GAZEBO_RESOURCE_PATH" value="$(env GAZEBO_RESOURCE_PATH):$(find simple_create)"/>
     <env name="GAZEBO_MODEL_PATH" value="$(env GAZEBO_MODEL_PATH):$(find simple_create)/models"/>
-    <arg name="world_name" value="worlds/maze.world"/>
+    <arg name="world_name" value="worlds/plaza.world"/>
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
@@ -13,9 +13,12 @@
     <arg name="debug" value="false"/>
   </include> 
 
- <node name="sonny_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" args="-sdf -x -0.6 -y 0.0 -z 0.0  -file $(find simple_create)/models/sonny/model.sdf -robot_namespace sonny -model sonny" />  
+<node name="sonny_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+    args="-sdf -x -0.6 -y 0.0 -z 0.0  -file $(find simple_create)/models/sonny/model.sdf -robot_namespace sonny -model sonny" />  
 
- <node pkg="rviz" type="rviz" name="rviz" args="-d $(find simple_create)/sonny.rviz" output="screen"/> 
+<node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0.1 0 0.2 0 0 0 sonny/base sonny/laserFrame 100" />
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find simple_create)/sonny.rviz" output="screen"/> 
+
 <!--
  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard" output="screen"/> -->
 
