@@ -1,4 +1,6 @@
 <launch>
+    <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find simple_create)/plaza.map.pgm my_map_resolution"/> -->
+
     <node pkg="move_base" type="move_base" name="move_base" output="screen">
         <param name="controller_frequency" value="3.0"/>
         <rosparam file="$(find simple_create)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
