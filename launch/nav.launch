@@ -1,12 +1,15 @@
 <launch>
-    <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(find simple_create)/plaza.map.pgm my_map_resolution"/> -->
+   <param name="use_sim_time" value="true"/>
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find simple_create)/plaza.map.yaml"/> 
 
-    <node pkg="move_base" type="move_base" name="move_base" output="screen">
-        <param name="controller_frequency" value="3.0"/>
+    <include file="$(find simple_create)/launch/amcl_diff.launch" />
+
+   <node pkg="move_base" type="move_base" name="move_base" output="screen">
+        <param name="controller_frequency" value="2.0"/>
         <rosparam file="$(find simple_create)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
         <rosparam file="$(find simple_create)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
         <rosparam file="$(find simple_create)/config/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find simple_create)/config/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find simple_create)/config/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find simple_create)/config/base_local_planner_params.yaml" command="load" /> 
     </node> 
 </launch>
