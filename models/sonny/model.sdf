@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <sdf version='1.6'>
   <model name='sonny'>
-    <link name='base'>
+    <link name='base_link'>
       <inertial>
         <pose frame=''>0.001453 -0.000453 0.029787 0 -0 0</pose>
         <inertia>
@@ -589,14 +589,13 @@
             </range>
           </ray>
           <plugin name='laser' filename='libgazebo_ros_laser.so'>
-            <topicName>laser_scan</topicName>
-            <frameName>laserFrame</frameName>
-            <robotBaseFrame>base</robotBaseFrame>
-            <robotNamespace>sonny</robotNamespace>
+            <topicName>/scan</topicName>
+            <frameName>base_link</frameName>
+            <robotBaseFrame>base_link</robotBaseFrame>
           </plugin>
           <always_on>1</always_on>
           <update_rate>30</update_rate>
-          <visualize>1</visualize>
+          <visualize>0</visualize>
         </sensor>
         <self_collide>0</self_collide>
         <enable_wind>0</enable_wind>
@@ -604,7 +603,7 @@
       </link>
     </model>
     <joint name='hokuyo_joint' type='fixed'>
-      <parent>base</parent>
+      <parent>base_link</parent>
       <child>hokuyo::link</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <physics>
@@ -621,7 +620,7 @@
       </physics>
     </joint>
     <joint name='left_wheel' type='revolute'>
-      <parent>base</parent>
+      <parent>base_link</parent>
       <child>left_wheel</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
@@ -654,7 +653,7 @@
       </physics>
     </joint>
     <joint name='right_wheel' type='revolute'>
-      <parent>base</parent>
+      <parent>base_link</parent>
       <child>right_wheel</child>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <axis>
@@ -698,9 +697,8 @@
       <torque>20</torque>
       <commandTopic>/cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
-      <odometryFrame>odomFrame</odometryFrame>
-      <robotBaseFrame>base</robotBaseFrame>
-      <robotNamespace>sonny</robotNamespace>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
       <publishWheelTF>1</publishWheelTF>
       <publishWheelJointState>1</publishWheelJointState>
     </plugin>
